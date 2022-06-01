@@ -1,4 +1,4 @@
-FROM python:3.10-buster
+FROM python:3.8-bullseye
 
 RUN mkdir -p /opt/app \
     && mkdir -p /opt/app/coinr
@@ -9,8 +9,6 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /opt/app
 
 COPY requirements.txt start-server.sh ./
-
-RUN pip install pip-autoremove pylint
 
 RUN pip install -r requirements.txt
 

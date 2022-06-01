@@ -44,6 +44,22 @@ services:
       retries: 3
       timeout: 5s
 
+  worker:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: >
+      bash -c "
+        cd coinr &&
+        celery -A coinr worker -l INFO -Q coin-tasks --concurrency=1
+      "
+    volumes:
+      - ${PWD}/coinr:/opt/app/coinr
+    networks:
+      - coinr
+    depends_on:
+      - redis
+
 
 networks:
   coinr:
@@ -52,4 +68,5 @@ networks:
 volumes:
   postgres-data:
   redis-data:
+  celery-data:
   site-packages:
