@@ -20,6 +20,6 @@ A postgres sevrer was provisioned as part of docker-compose with the following c
 
 ### Brief walk through of implementation
 Because of the requirement fo a 400ms response time, it was clear that the server will have to process this requests
-asynchronously. To achieve this, I decided to utilize redis as a message brokwr and celery to be able to run background tasks. Celery
+asynchronously. To achieve this, I decided to utilize redis as a message broker and celery to be able to run background tasks. Celery
 will also be used as a way to handle the throttling from CoinGecko for later retires.
 

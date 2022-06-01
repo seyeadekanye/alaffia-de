@@ -33,7 +33,7 @@ def handle_csv(data):
             elif response.status_code == 200:
                 data = response.json()
                 tickers = data.get('tickers')
-                tickers_list = [t.get('market').get('identifier') for t in tickers]
+                tickers_list = list(set([t.get('market').get('identifier') for t in tickers]))
                 logger.info(tickers_list)
                 ct = CoinTask(
                     id=id,
@@ -67,7 +67,7 @@ def handle_json(data):
                 data = response.json()
                 logger.info(data)
                 tickers = data.get('tickers')
-                tickers_list = [t.get('market').get('identifier') for t in tickers]
+                tickers_list = list(set([t.get('market').get('identifier') for t in tickers]))
                 logger.info(tickers_list)
                 ct = CoinTask(
                     id=id,
