@@ -35,11 +35,13 @@ def handle_csv(data):
                 tickers = data.get('tickers')
                 tickers_list = [t.get('market').get('identifier') for t in tickers]
                 logger.info(tickers_list)
-                CoinTask(
+                ct = CoinTask(
                     id=id,
                     exchanges=tickers_list,
                     task_id=get_and_increment_task_id()
-                ).save()
+                )
+                ct.save()
+                logger.info(CoinTask.objects.all())
             else:
                 logger.error(f'There was an issue fetching data for id: {id}')
     except Exception as e:
@@ -67,11 +69,13 @@ def handle_json(data):
                 tickers = data.get('tickers')
                 tickers_list = [t.get('market').get('identifier') for t in tickers]
                 logger.info(tickers_list)
-                CoinTask(
+                ct = CoinTask(
                     id=id,
                     exchanges=tickers_list,
                     task_id=get_and_increment_task_id()
-                ).save()
+                )
+                ct.save()
+                logger.info(CoinTask.objects.all())
             else:
                 logger.error(f'There was an issue fetching data for id: {id}')
     except Exception as e:
