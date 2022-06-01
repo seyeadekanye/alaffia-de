@@ -43,8 +43,8 @@ class CoinTaskViewSet(APIView):
         logger.info(f"Handling new request with content-type: {request.content_type}")
         logger.info(f"This is csv {request.content_type == 'text/csv'}")
         if request.content_type == 'application/json':
-            handle_json(request.data)
+            handle_json.delay(request.data)
             return Response(status=HTTP_200_OK)
         elif request.content_type == 'text/csv':
-            handle_csv(request.data)
+            handle_csv.delay(request.data)
             return Response(status=HTTP_200_OK)
